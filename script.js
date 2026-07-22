@@ -18,9 +18,17 @@ const HEART_Y_OFFSET = 0.16;
 const HEART_TOP_EXTENT = 1.12;
 const HEART_BOTTOM_EXTENT = 1.14;
 
-const TARGET_HEARTS = 580;
-const INITIAL_FILL_MS = 2000;
-const CHAIN_INTERVAL_MS = 42;
+const isMobile =
+  window.matchMedia("(max-width: 768px)").matches ||
+  /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+
+if (isMobile) {
+  document.documentElement.classList.add("mobile");
+}
+
+const TARGET_HEARTS = isMobile ? 200 : 580;
+const INITIAL_FILL_MS = isMobile ? 1200 : 2000;
+const CHAIN_INTERVAL_MS = isMobile ? 85 : 42;
 
 const BOUNDS = {
   minX: HEART_SHAPE.centerX - HEART_SHAPE.scaleX * 1.06,
