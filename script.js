@@ -26,9 +26,10 @@ if (isMobile) {
   document.documentElement.classList.add("mobile");
 }
 
-const TARGET_HEARTS = isMobile ? 200 : 580;
-const INITIAL_FILL_MS = isMobile ? 1200 : 2000;
-const CHAIN_INTERVAL_MS = isMobile ? 85 : 42;
+const TARGET_HEARTS = isMobile ? 100 : 580;
+const CHAIN_INTERVAL_MS = isMobile ? 120 : 42;
+const FILL_BATCH_SIZE = isMobile ? 8 : 25;
+const FILL_BATCH_DELAY = isMobile ? 120 : 50;
 
 const BOUNDS = {
   minX: HEART_SHAPE.centerX - HEART_SHAPE.scaleX * 1.06,
@@ -144,19 +145,13 @@ function spawnHeart(pos) {
 async function fillHeartCompletely() {
   const positions = buildInitialPositions();
 
-  await Promise.all(
-    positions.map(
-      (pos) =>
-        new Promise((resolve) => {
-          setTimeout(() => {
-            spawnHeart(pos);
-            resolve();
-          }, Math.random() * INITIAL_FILL_MS);
-        })
-    )
-  );
+  for (let i = 0; i < positions.length; i += FILL_BATCH_SIZE) {
+    const batch = positions.slice(i, i + FILL_BATCH_SIZE);
+    batch.forEach((pos) => spawnHeart(pos));
+    await new Promise((r) => setTimeout(r, FILL_BATCH_DELAY));
+  }
 
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 300));
 }
 
 function startInfiniteChain() {
@@ -185,4 +180,6 @@ async function start() {
   startInfiniteChain();
 }
 
-start();
+window.addEventListener("load", () => {
+  setTimeout(start, isMobile ? 400 : 100);
+});

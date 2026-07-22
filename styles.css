@@ -168,26 +168,21 @@ body {
   body {
     overflow-x: hidden;
     overflow-y: auto;
-    padding: 64px 8px 12px;
+    padding: 56px 0 16px;
     align-items: flex-start;
   }
 
   .title {
     font-size: 1.15rem;
-    top: 16px;
+    top: 14px;
   }
 
   .scene {
-    width: 360px;
-    height: 498px;
-    transform: scale(calc((100vw - 16px) / 360));
+    width: 420px;
+    height: 580px;
+    transform: scale(0.82);
     transform-origin: top center;
     margin: 0 auto;
-  }
-
-  .tree-svg,
-  .hearts-layer {
-    height: 445px;
   }
 
   .curved-phrase {
@@ -197,4 +192,8 @@ body {
 
 .mobile .heart {
   filter: none;
+}
+
+.mobile .heart.fly {
+  animation-duration: 1.6s;
 }
