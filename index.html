@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Árbol de Corazones</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <p class="title">♥ con amor ♥</p>
+
+  <div class="scene">
+    <svg class="tree-svg" viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="trunkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#4a2f1a" />
+          <stop offset="45%" stop-color="#8b5a3c" />
+          <stop offset="100%" stop-color="#4a2f1a" />
+        </linearGradient>
+        <linearGradient id="branchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#5c3a22" />
+          <stop offset="100%" stop-color="#9a6b45" />
+        </linearGradient>
+      </defs>
+
+      <!-- Tronco -->
+      <path
+        class="trunk"
+        d="M186 520
+           C184 460, 188 400, 194 345
+           L226 345
+           C232 400, 236 460, 234 520 Z"
+        fill="url(#trunkGrad)"
+      />
+
+      <!-- Rama central -->
+      <path
+        class="branch branch-main"
+        d="M210 348 Q208 300 210 240"
+        fill="none"
+        stroke="url(#branchGrad)"
+        stroke-width="10"
+        stroke-linecap="round"
+      />
+
+      <!-- Ramas principales izquierda -->
+      <path
+        class="branch"
+        d="M200 330 Q140 310 90 265 Q60 240 45 210"
+        fill="none"
+        stroke="url(#branchGrad)"
+        stroke-width="9"
+        stroke-linecap="round"
+      />
+      <path
+        class="branch"
+        d="M198 300 Q130 285 75 250 Q50 230 35 200"
+        fill="none"
+        stroke="url(#branchGrad)"
+        stroke-width="7"
+        stroke-linecap="round"
+      />
+      <path
+        class="branch"
+        d="M202 270 Q160 250 120 220 Q95 200 80 175"
+        fill="none"
+        stroke="url(#branchGrad)"
+        stroke-width="6"
+        stroke-linecap="round"
+      />
+
+      <!-- Ramas principales derecha -->
+      <path
+        class="branch"
+        d="M220 330 Q280 310 330 265 Q360 240 375 210"
+        fill="none"
+        stroke="url(#branchGrad)"
+        stroke-width="9"
+        stroke-linecap="round"
+      />
+      <path
+        class="branch"
+        d="M222 300 Q290 285 345 250 Q370 230 385 200"
+        fill="none"
+        stroke="url(#branchGrad)"
+        stroke-width="7"
+        stroke-linecap="round"
+      />
+      <path
+        class="branch"
+        d="M218 270 Q260 250 300 220 Q325 200 340 175"
+        fill="none"
+        stroke="url(#branchGrad)"
+        stroke-width="6"
+        stroke-linecap="round"
+      />
+
+      <!-- Ramitas secundarias -->
+      <path class="twig" d="M90 265 Q70 250 55 235" fill="none" stroke="#6b4423" stroke-width="4" stroke-linecap="round" />
+      <path class="twig" d="M75 250 Q55 238 40 225" fill="none" stroke="#6b4423" stroke-width="3" stroke-linecap="round" />
+      <path class="twig" d="M120 220 Q100 205 88 190" fill="none" stroke="#6b4423" stroke-width="3" stroke-linecap="round" />
+      <path class="twig" d="M330 265 Q350 250 365 235" fill="none" stroke="#6b4423" stroke-width="4" stroke-linecap="round" />
+      <path class="twig" d="M345 250 Q365 238 380 225" fill="none" stroke="#6b4423" stroke-width="3" stroke-linecap="round" />
+      <path class="twig" d="M300 220 Q320 205 332 190" fill="none" stroke="#6b4423" stroke-width="3" stroke-linecap="round" />
+      <path class="twig" d="M210 240 Q195 215 185 195" fill="none" stroke="#6b4423" stroke-width="3" stroke-linecap="round" />
+      <path class="twig" d="M210 240 Q225 215 235 195" fill="none" stroke="#6b4423" stroke-width="3" stroke-linecap="round" />
+      <path class="twig" d="M210 280 Q200 260 192 245" fill="none" stroke="#6b4423" stroke-width="3" stroke-linecap="round" />
+      <path class="twig" d="M210 280 Q220 260 228 245" fill="none" stroke="#6b4423" stroke-width="3" stroke-linecap="round" />
+    </svg>
+
+    <div class="hearts-layer" id="heartsLayer"></div>
+
+    <svg class="phrase-svg" viewBox="0 0 420 72" aria-label="Eres mi persona Favorita">
+      <defs>
+        <path id="phraseCurve" d="M 24 22 Q 210 54 396 22" />
+      </defs>
+      <text class="curved-phrase">
+        <textPath href="#phraseCurve" startOffset="50%" text-anchor="middle">
+          Eres mi persona Favorita
+        </textPath>
+      </text>
+    </svg>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

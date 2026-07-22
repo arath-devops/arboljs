@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #dbeef8 0%, #b8dff5 50%, #a8d4f0 100%);
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.title {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #4a7a9b;
+  font-size: 1.4rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.scene {
+  position: relative;
+  width: 420px;
+  height: 580px;
+}
+
+.tree-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 520px;
+  overflow: visible;
+  filter: drop-shadow(0 4px 8px rgba(60, 40, 20, 0.15));
+}
+
+.tree-svg .branch,
+.tree-svg .twig {
+  stroke-linejoin: round;
+}
+
+.hearts-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 520px;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  opacity: 0;
+  transform: scale(0);
+  filter: drop-shadow(0 2px 4px rgba(255, 48, 70, 0.35));
+  --scale: 1;
+  --heart-a: #fe5f6a;
+  --heart-b: #ff3046;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 11px;
+  height: 17px;
+  background: linear-gradient(145deg, var(--heart-a), var(--heart-b));
+  border-radius: 11px 11px 0 0;
+  top: 0;
+}
+
+.heart::before {
+  left: 11px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.heart::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+.heart.appear {
+  animation: appear 0.35s ease forwards;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  60% {
+    transform: scale(calc(var(--scale) * 1.15)) rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(var(--scale)) rotate(0deg);
+  }
+}
+
+.heart.fly {
+  animation: fly 2s ease-in forwards;
+}
+
+@keyframes fly {
+  0% {
+    opacity: 1;
+    transform: scale(var(--scale)) translate(0, 0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(calc(var(--scale) * 0.5)) translate(var(--tx), var(--ty)) rotate(var(--rot));
+  }
+}
+
+.phrase-svg {
+  position: absolute;
+  left: 0;
+  bottom: 6px;
+  width: 100%;
+  height: 72px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.curved-phrase {
+  fill: #ff3046;
+  font-family: "Segoe Script", "Brush Script MT", "Lucida Handwriting", cursive;
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  stroke: #ff3046;
+  stroke-width: 0.35px;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.85));
+  clip-path: inset(0 100% 0 0);
+  animation: phraseReveal 3s ease-out 0.8s forwards;
+}
+
+@keyframes phraseReveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
