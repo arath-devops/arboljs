@@ -18,18 +18,9 @@ const HEART_Y_OFFSET = 0.16;
 const HEART_TOP_EXTENT = 1.12;
 const HEART_BOTTOM_EXTENT = 1.14;
 
-const isMobile =
-  window.matchMedia("(max-width: 768px)").matches ||
-  /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
-
-if (isMobile) {
-  document.documentElement.classList.add("mobile");
-}
-
-const TARGET_HEARTS = isMobile ? 100 : 580;
-const CHAIN_INTERVAL_MS = isMobile ? 120 : 42;
-const FILL_BATCH_SIZE = isMobile ? 8 : 25;
-const FILL_BATCH_DELAY = isMobile ? 120 : 50;
+const TARGET_HEARTS = 580;
+const INITIAL_FILL_MS = 2000;
+const CHAIN_INTERVAL_MS = 42;
 
 const BOUNDS = {
   minX: HEART_SHAPE.centerX - HEART_SHAPE.scaleX * 1.06,
@@ -145,13 +136,19 @@ function spawnHeart(pos) {
 async function fillHeartCompletely() {
   const positions = buildInitialPositions();
 
-  for (let i = 0; i < positions.length; i += FILL_BATCH_SIZE) {
-    const batch = positions.slice(i, i + FILL_BATCH_SIZE);
-    batch.forEach((pos) => spawnHeart(pos));
-    await new Promise((r) => setTimeout(r, FILL_BATCH_DELAY));
-  }
+  await Promise.all(
+    positions.map(
+      (pos) =>
+        new Promise((resolve) => {
+          setTimeout(() => {
+            spawnHeart(pos);
+            resolve();
+          }, Math.random() * INITIAL_FILL_MS);
+        })
+    )
+  );
 
-  await new Promise((r) => setTimeout(r, 300));
+  await new Promise((r) => setTimeout(r, 500));
 }
 
 function startInfiniteChain() {
@@ -180,6 +177,4 @@ async function start() {
   startInfiniteChain();
 }
 
-window.addEventListener("load", () => {
-  setTimeout(start, isMobile ? 400 : 100);
-});
+start();
