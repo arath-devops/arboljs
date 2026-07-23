@@ -45,9 +45,12 @@ function showSurpriseAt(index) {
   if (isFinal) {
     modalPhoto.hidden = true;
     modalPhoto.removeAttribute("src");
+    modalPhoto.style.display = "none";
+    modalPhoto.alt = "";
     modalPanel.classList.add("modal-panel--final");
   } else {
     modalPhoto.hidden = false;
+    modalPhoto.style.display = "";
     modalPhoto.src = surprise.image;
     modalPhoto.alt = "Recuerdo especial";
     modalPanel.classList.remove("modal-panel--final");
@@ -84,6 +87,7 @@ function closeModal() {
   currentIndex = -1;
   modalAgain.textContent = "Otra sorpresa ♥";
   modalPhoto.hidden = false;
+  modalPhoto.style.display = "";
   modalPanel.classList.remove("modal-panel--final");
   surpriseBtn.focus();
 }

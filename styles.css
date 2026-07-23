@@ -306,12 +306,13 @@ body.modal-open {
   background: #eef6fc;
 }
 
-.modal-photo[hidden] {
-  display: none;
+.modal-photo[hidden],
+.modal-panel--final .modal-photo {
+  display: none !important;
 }
 
 .modal-panel--final .modal-quote {
-  margin-top: 8px;
+  margin-top: 0;
   font-size: clamp(1.05rem, 5vw, 1.45rem);
 }
 
