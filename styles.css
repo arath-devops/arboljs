@@ -4,39 +4,84 @@
   box-sizing: border-box;
 }
 
+:root {
+  --design-w: 420;
+  --design-h: 580;
+  --header-space: 76px;
+  --scene-scale: 1;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: linear-gradient(180deg, #dbeef8 0%, #b8dff5 50%, #a8d4f0 100%);
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: "Segoe UI", sans-serif;
+  padding:
+    max(0px, env(safe-area-inset-top))
+    max(0px, env(safe-area-inset-right))
+    max(12px, env(safe-area-inset-bottom))
+    max(0px, env(safe-area-inset-left));
+}
+
+.app {
+  width: 100%;
+  min-height: calc(100dvh - 12px);
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #dbeef8 0%, #b8dff5 50%, #a8d4f0 100%);
-  overflow: hidden;
-  font-family: "Segoe UI", sans-serif;
+  padding: var(--header-space) 12px 16px;
 }
 
 .title {
   position: fixed;
-  top: 24px;
+  top: max(14px, env(safe-area-inset-top, 14px));
   left: 50%;
   transform: translateX(-50%);
+  z-index: 10;
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  text-align: center;
   color: #4a7a9b;
-  font-size: 1.4rem;
+  font-size: clamp(1rem, 4.2vw, 1.4rem);
   font-weight: 300;
-  letter-spacing: 2px;
+  letter-spacing: clamp(1px, 0.4vw, 2px);
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
 }
 
 .title-heart {
   color: #ff0022;
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 4.5vw, 1.5rem);
   margin-left: 4px;
   text-shadow: 0 1px 3px rgba(255, 0, 34, 0.35);
 }
 
-.scene {
+.scene-wrap {
   position: relative;
+  width: calc(var(--design-w) * 1px * var(--scene-scale));
+  height: calc(var(--design-h) * 1px * var(--scene-scale));
+  flex-shrink: 0;
+}
+
+.scene {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 420px;
   height: 580px;
+  transform: scale(var(--scene-scale));
+  transform-origin: top left;
 }
 
 .tree-svg {
@@ -164,36 +209,44 @@ body {
   }
 }
 
-@media (max-width: 768px) {
-  body {
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding: 56px 0 16px;
-    align-items: flex-start;
+@media (max-width: 480px) {
+  :root {
+    --header-space: 64px;
+  }
+
+  .heart {
+    filter: none;
+  }
+
+  .heart.fly {
+    animation-duration: 1.7s;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  .app {
+    justify-content: flex-start;
+    padding-top: 52px;
   }
 
   .title {
-    font-size: 1.15rem;
-    top: 14px;
+    font-size: clamp(0.95rem, 3vh, 1.2rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heart.appear,
+  .heart.fly,
+  .curved-phrase {
+    animation: none;
   }
 
-  .scene {
-    width: 420px;
-    height: 580px;
-    transform: scale(0.82);
-    transform-origin: top center;
-    margin: 0 auto;
+  .heart.appear {
+    opacity: 1;
+    transform: scale(var(--scale));
   }
 
   .curved-phrase {
-    font-size: 20px;
+    clip-path: none;
   }
-}
-
-.mobile .heart {
-  filter: none;
-}
-
-.mobile .heart.fly {
-  animation-duration: 1.6s;
 }

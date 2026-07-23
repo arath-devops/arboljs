@@ -22,6 +22,48 @@ const TARGET_HEARTS = 580;
 const INITIAL_FILL_MS = 2000;
 const CHAIN_INTERVAL_MS = 42;
 
+const DESIGN_W = 420;
+const DESIGN_H = 580;
+
+function updateSceneScale() {
+  const paddingX = 24;
+  const paddingY = window.innerWidth <= 480 ? 72 : 88;
+  const scaleX = (window.innerWidth - paddingX) / DESIGN_W;
+  const scaleY = (window.innerHeight - paddingY) / DESIGN_H;
+  const scale = Math.min(1, scaleX, scaleY);
+  document.documentElement.style.setProperty("--scene-scale", String(scale));
+}
+
+function getPerformanceProfile() {
+  const narrow = window.innerWidth <= 480;
+  const lowMemory = navigator.deviceMemory && navigator.deviceMemory <= 4;
+  return narrow || lowMemory ? "mobile" : "desktop";
+}
+
+let performanceProfile = getPerformanceProfile();
+
+function refreshPerformanceProfile() {
+  performanceProfile = getPerformanceProfile();
+  if (performanceProfile === "mobile") {
+    document.documentElement.classList.add("mobile");
+  } else {
+    document.documentElement.classList.remove("mobile");
+  }
+}
+
+updateSceneScale();
+refreshPerformanceProfile();
+window.addEventListener("resize", () => {
+  updateSceneScale();
+  refreshPerformanceProfile();
+});
+window.addEventListener("orientationchange", () => {
+  setTimeout(() => {
+    updateSceneScale();
+    refreshPerformanceProfile();
+  }, 150);
+});
+
 const BOUNDS = {
   minX: HEART_SHAPE.centerX - HEART_SHAPE.scaleX * 1.06,
   maxX: HEART_SHAPE.centerX + HEART_SHAPE.scaleX * 1.06,
@@ -173,8 +215,13 @@ function startInfiniteChain() {
 }
 
 async function start() {
+  updateSceneScale();
   await fillHeartCompletely();
   startInfiniteChain();
 }
 
-start();
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", start);
+} else {
+  start();
+}
