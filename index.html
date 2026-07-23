@@ -126,12 +126,12 @@
 
     <div class="hearts-layer" id="heartsLayer"></div>
 
-    <svg class="phrase-svg" viewBox="0 0 420 72" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-label="Eres mi persona Favorita">
+    <svg class="phrase-svg" viewBox="0 0 420 72" aria-label="Eres mi persona Favorita">
       <defs>
         <path id="phraseCurve" d="M 24 22 Q 210 54 396 22" />
       </defs>
       <text class="curved-phrase">
-        <textPath href="#phraseCurve" xlink:href="#phraseCurve" startOffset="50%" text-anchor="middle">
+        <textPath href="#phraseCurve" startOffset="50%" text-anchor="middle">
           Eres mi persona Favorita
         </textPath>
       </text>
@@ -144,7 +144,7 @@
     </button>
   </main>
 
-  <div class="modal" id="surpriseModal" aria-hidden="true">
+  <div class="modal" id="surpriseModal" hidden>
     <div class="modal-backdrop" id="modalBackdrop"></div>
     <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalQuote">
       <button type="button" class="modal-close" id="modalClose" aria-label="Cerrar">

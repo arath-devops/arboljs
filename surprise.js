@@ -33,36 +33,10 @@ const surpriseBtn = document.getElementById("surpriseBtn");
 const modalClose = document.getElementById("modalClose");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const modalAgain = document.getElementById("modalAgain");
+
 const modalPanel = document.querySelector(".modal-panel");
 
 let currentIndex = -1;
-let scrollLockY = 0;
-
-function lockPageScroll() {
-  scrollLockY = window.scrollY || window.pageYOffset || 0;
-  document.body.style.position = "fixed";
-  document.body.style.top = `-${scrollLockY}px`;
-  document.body.style.left = "0";
-  document.body.style.right = "0";
-  document.body.style.width = "100%";
-  document.body.classList.add("modal-open");
-}
-
-function unlockPageScroll() {
-  document.body.style.position = "";
-  document.body.style.top = "";
-  document.body.style.left = "";
-  document.body.style.right = "";
-  document.body.style.width = "";
-  document.body.classList.remove("modal-open");
-  window.scrollTo(0, scrollLockY);
-}
-
-function openModal() {
-  modal.classList.add("is-open");
-  modal.setAttribute("aria-hidden", "false");
-  lockPageScroll();
-}
 
 function showSurpriseAt(index) {
   const surprise = SURPRISES[index];
@@ -81,8 +55,9 @@ function showSurpriseAt(index) {
 
   modalQuote.textContent = surprise.quote;
   modalAgain.textContent = isFinal ? "Salir" : "Otra sorpresa ♥";
-  openModal();
-  modalClose.focus({ preventScroll: true });
+  modal.hidden = false;
+  document.body.classList.add("modal-open");
+  modalClose.focus();
 }
 
 function showNextSurprise() {
@@ -104,18 +79,13 @@ function handleModalAgain() {
 }
 
 function closeModal() {
-  modal.classList.remove("is-open");
-  modal.setAttribute("aria-hidden", "true");
-  unlockPageScroll();
+  modal.hidden = true;
+  document.body.classList.remove("modal-open");
   currentIndex = -1;
   modalAgain.textContent = "Otra sorpresa ♥";
   modalPhoto.hidden = false;
   modalPanel.classList.remove("modal-panel--final");
-  surpriseBtn.focus({ preventScroll: true });
-}
-
-function isModalOpen() {
-  return modal.classList.contains("is-open");
+  surpriseBtn.focus();
 }
 
 surpriseBtn.addEventListener("click", showNextSurprise);
@@ -124,7 +94,7 @@ modalClose.addEventListener("click", closeModal);
 modalBackdrop.addEventListener("click", closeModal);
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && isModalOpen()) {
+  if (event.key === "Escape" && !modal.hidden) {
     closeModal();
   }
 });
