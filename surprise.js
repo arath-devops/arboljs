@@ -1,21 +1,21 @@
 const SURPRISES = [
   {
-    image: "./images/foto-1.jpg",
+    image: "./images/foto-1.jpeg",
     quote:
       "Yo siento que lo nuestro es destino, por la conexion que tenemos",
   },
   {
-    image: "./images/foto-2.jpg",
+    image: "./images/foto-2.jpeg",
     quote:
       "Gracias por ser la persona que paso un mundial junto a mi, y por muchos mas juntos",
   },
   {
-    image: "./images/foto-3.jpg",
+    image: "./images/foto-3.jpeg",
     quote:
       "Por que me gusta verte sonreir y que no tengas pena de hacer cosas distindas a mi lado",
   },
   {
-    image: "./images/foto-4.jpg",
+    image: "./images/foto-4.jpeg",
     quote:
       "Siempre voy a querer tomarte de la mano y jamas soltarte pase lo que pase",
   },

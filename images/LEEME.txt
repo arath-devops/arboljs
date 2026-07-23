@@ -1,8 +1,8 @@
 Coloca aqui tus 4 fotos con estos nombres:
 
-1. foto-1.jpg  ->  "Yo siento que lo nuestro es destino..."
-2. foto-2.jpg  ->  "Gracias por ser la persona que paso un mundial..."
-3. foto-3.jpg  ->  "Por que me gusta verte sonreir..."
-4. foto-4.jpg  ->  "Siempre voy a querer tomarte de la mano..."
+1. foto-1.jpeg  ->  "Yo siento que lo nuestro es destino..."
+2. foto-2.jpeg  ->  "Gracias por ser la persona que paso un mundial..."
+3. foto-3.jpeg  ->  "Por que me gusta verte sonreir..."
+4. foto-4.jpeg  ->  "Siempre voy a querer tomarte de la mano..."
 
-Tambien funcionan .png y .webp si cambias la extension en surprise.js
+Tambien funcionan .jpg, .png y .webp si cambias la extension en surprise.js
