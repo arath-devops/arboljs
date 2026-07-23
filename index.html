@@ -138,8 +138,25 @@
     </svg>
       </div>
     </div>
+
+    <button type="button" class="surprise-btn" id="surpriseBtn">
+      Una sorpresa para ti!!
+    </button>
   </main>
 
+  <div class="modal" id="surpriseModal" hidden>
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalQuote">
+      <button type="button" class="modal-close" id="modalClose" aria-label="Cerrar">
+        ×
+      </button>
+      <img class="modal-photo" id="modalPhoto" src="" alt="Recuerdo especial" />
+      <p class="modal-quote" id="modalQuote"></p>
+      <button type="button" class="modal-again" id="modalAgain">Otra sorpresa ♥</button>
+    </div>
+  </div>
+
   <script src="./script.js" defer></script>
+  <script src="./surprise.js" defer></script>
 </body>
 </html>
